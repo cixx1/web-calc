@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Web-kalkulator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 600px;
+      margin: 40px auto;
+      padding: 0 20px;
+      background: #f5f5f5;
+    }
+    h1 { color: #333; }
+    section {
+      background: white;
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    h2 { margin-top: 0; color: #555; }
+    input {
+      padding: 8px;
+      font-size: 1rem;
+      width: 100px;
+      margin-right: 8px;
+    }
+    button {
+      padding: 8px 16px;
+      font-size: 1rem;
+      cursor: pointer;
+      background: #0070f3;
+      color: white;
+      border: none;
+      border-radius: 4px;
+    }
+    button:hover { background: #005bb5; }
+    .resultat {
+      font-weight: bold;
+      color: #0070f3;
+    }
+  </style>
+</head>
+<body>
+  <h1>Web-kalkulator</h1>
+
+  <section id="fakultet">
+    <h2>Fakultet (n!)</h2>
+    <form id="fakultet-form">
+      <input type="number" id="fakultet-input" min="0" placeholder="Tall" />
+      <button type="submit">Regn ut</button>
+    </form>
+    <p>Resultat: <span class="resultat" id="fakultet-resultat"></span></p>
+  </section>
+
+  <section id="fizzbuzz">
+    <h2>FizzBuzz</h2>
+    <form id="fizzbuzz-form">
+      <input type="number" id="fizzbuzz-input" min="1" placeholder="Tall" />
+      <button type="submit">Regn ut</button>
+    </form>
+    <p>Resultat: <span class="resultat" id="fizzbuzz-resultat"></span></p>
+  </section>
+
+  <section id="fibonacci">
+    <h2>Fibonacci</h2>
+    <form id="fibonacci-form">
+      <input type="number" id="fibonacci-input" min="1" placeholder="Tall" />
+      <button type="submit">Regn ut</button>
+    </form>
+    <p>Resultat: <span class="resultat" id="fibonacci-resultat"></span></p>
+  </section>
+
+  <script>
+    function fakultet(n) {
+      if (n < 2) return 1;
+      let result = 1;
+      for (let i = 2; i <= n; i++) result *= i;
+      return result;
+    }
+
+    function fizzBuzz(n) {
+      if (n % 15 === 0) return "FizzBuzz";
+      if (n % 3 === 0) return "Fizz";
+      if (n % 5 === 0) return "Buzz";
+      return n.toString();
+    }
+
+    function fibonacci(n) {
+      if (n <= 2) return 1;
+      let a = 1, b = 1;
+      for (let i = 3; i <= n; i++) {
+        let temp = a + b;
+        a = b;
+        b = temp;
+      }
+      return b;
+    }
+
+    document.getElementById('fakultet-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const n = parseInt(document.getElementById('fakultet-input').value);
+      document.getElementById('fakultet-resultat').textContent = fakultet(n);
+    });
+
+    document.getElementById('fizzbuzz-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const n = parseInt(document.getElementById('fizzbuzz-input').value);
+      document.getElementById('fizzbuzz-resultat').textContent = fizzBuzz(n);
+    });
+
+    document.getElementById('fibonacci-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const n = parseInt(document.getElementById('fibonacci-input').value);
+      document.getElementById('fibonacci-resultat').textContent = fibonacci(n);
+    });
+  </script>
+</body>
+</html>
